@@ -1,0 +1,27 @@
+zombie:
+  suit: club
+  color: DarkGreen
+  K: 626.png
+  Q: 1079.png
+  J: 44.png
+
+cyber:
+  suit: heart
+  color: Violet
+  K: 808.png
+  Q: 165.png
+  J: 1244.png
+
+hoodie:
+  suit: diamond
+  color: Khaki
+  K: 507.png
+  Q: 414.png
+  J: 147.png
+
+original:
+  suit: spade
+  color: DarkOrange
+  K: 994.png
+  Q: 1024.png
+  J: 943.png
