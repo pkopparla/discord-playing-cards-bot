@@ -24,7 +24,7 @@ def point_grid(x, y):
 
 
 def symmetric_points(width, height, n):
-    """Find points to place icons given
+    """Find points to place suit icons given
     size of card and number of icons
 
     Args:
@@ -84,6 +84,17 @@ def symmetric_points(width, height, n):
 
 
 def get_suit_image(suit_name, width, height, color) -> Image:
+    """Preprocess suit images to match the color and card size
+
+    Args:
+        suit_name (string): 
+        width (int): 
+        height (int): 
+        color (string): 
+
+    Returns:
+        Image: sized and colored PIL.Image of the suit icon
+    """
     im1 = Image.open("base_images/" + suit_name + ".png")
     data = np.array(im1)  # "data" is a height x width x 4 numpy array
     red, green, blue, alpha = data.T  # Temporarily unpack the bands for readability
@@ -97,12 +108,22 @@ def get_suit_image(suit_name, width, height, color) -> Image:
 
 
 def generate_card(card_type="5", suit="heart", species="cyber", color="Violet"):
+    """Generates a playing card given the characteristics
+
+    Args:
+        card_type (str, optional): Card number or face card letter, use 1 for Aces. Defaults to "5".
+        suit (str, optional): heart, diamond, spade or club. Defaults to "heart".
+        species (str, optional): zombie, original, cyber or hoodie. Defaults to "cyber".
+        color (str, optional): colors for each suit, usually loaded from presets.yaml. Defaults to "Violet".
+
+    Returns:
+        None: If it worked, a card of the given description is saved under cards/
+    """
     width = 1280
     height = 1800
     canvas_size = (width, height)
-    bg_color = (0, 0, 0)  # (239, 222, 205)
+    bg_color = (0, 0, 0)
     image = Image.new("RGB", size=canvas_size, color=bg_color)
-    # font = ImageFont.truetype("Arial.ttf", height // 10)
     font = ImageFont.truetype("junegull.ttf", height // 10)
     points = symmetric_points(width, height, card_type)
     if card_type.isdigit():
@@ -148,10 +169,9 @@ def generate_card(card_type="5", suit="heart", species="cyber", color="Violet"):
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         inp = sys.argv[1]
-        print(inp)
         if inp == "all":
             nums = [str(a) for a in range(1, 11)] + ["J", "Q", "K"]
-            with open("presets.yaml", "r") as stream:
+            with open("card_generator/presets.yaml", "r") as stream:
                 presets = yaml.safe_load(stream)
             for species in ["zombie", "cyber", "original", "hoodie"]:
                 color = presets[species]["color"]

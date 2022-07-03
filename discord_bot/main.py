@@ -2,7 +2,7 @@ import discord
 import yaml, os
 from draw import get_slots
 
-with open("discord-bot/.env", "r") as stream:
+with open("discord_bot/.env", "r") as stream:
     token = yaml.safe_load(stream)["discord-oauth-token"]
 
 client = discord.Client()

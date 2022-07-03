@@ -4,11 +4,26 @@ from PIL import Image
 
 
 def get_cards(k):
+    """Draw k cards with replacement from all cards
+
+    Args:
+        k (int): number of cards to be drawn
+    Returns:
+        list: list of card filenames
+    """
     cards = glob("cards/[!asheet]*")
     return choices(cards, k=k)
 
 
 def make_sheet(cards):
+    """Takes n cards and assembles them into a sheet, 5<=n<=1
+
+    Args:
+        cards (list of filenames): locations of card files
+
+    Returns:
+        string: Assembled .png image file 
+    """
     columns = len(cards)
     image_w, image_h = Image.open(cards[0]).size
     grid_image = Image.new(
@@ -27,6 +42,14 @@ def make_sheet(cards):
 
 
 def get_slots(k=3):
+    """Get an image of k randomly drawn cards from the set
+
+    Args:
+        k (int, optional): Number of cards to be drawn. Defaults to 3.
+
+    Returns:
+        string: Location of a png file
+    """
     cards = get_cards(k)
     sheet = make_sheet(cards)
     return sheet
