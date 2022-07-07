@@ -7,4 +7,13 @@ Usage:
 2. To launch the bot, do
 `python discord_bot/main.py`. Needs the authorization token to be passed in either as an environment variable or in a .env file.
 3. The bot looks for a command `/draw` followed by a number from 1 to 5. For invalid input it defaults to 1. The bot then generates an image with that number of randomly selected cards (with replacement, ie., one card can appear multiple times in each selection) from the collection and posts it in a response.
-4. The code is pretty light and was tested to work on a google cloud ec2-micro instance.
+4. The code is pretty light and was tested to work on a google cloud ec2-micro instance. Command list for reference:
+- `gcloud compute scp --recurse ../discord-playing-cards-bot cardbot-vm:~`
+- `gcloud compute ssh cardbot-vm`
+- `sudo apt-get install pip`
+- `pip install -r requirements.txt`
+- Add `export PATH="/home/kopparla/.local/bin:$PATH" to .bashrc
+- `python3 discord_bot/main.py`
+5. Docker setup, commands:
+- `docker build -t cardbot .`
+- `docker run -it -v $(pwd):/workspace  -w /workspace cardbot python discord_bot/main.py`

@@ -1,0 +1,9 @@
+services:
+  backend:
+    build: .
+    image: cardbot
+    container_name: cardbot-test
+    volumes:
+          - .:/workspace
+    working_dir: /workspace
+    command: python discord_bot/main.py

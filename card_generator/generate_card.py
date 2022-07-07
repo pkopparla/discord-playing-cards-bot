@@ -4,7 +4,7 @@ from matplotlib import colors
 import numpy as np
 import sys
 import yaml
-
+from time import time
 
 def point_grid(x, y):
     """Given two arrays of points x & y, generates (x,y)
@@ -173,6 +173,7 @@ if __name__ == "__main__":
             nums = [str(a) for a in range(1, 11)] + ["J", "Q", "K"]
             with open("card_generator/presets.yaml", "r") as stream:
                 presets = yaml.safe_load(stream)
+            start = time()
             for species in ["zombie", "cyber", "original", "hoodie"]:
                 color = presets[species]["color"]
                 suit = presets[species]["suit"]
@@ -180,6 +181,8 @@ if __name__ == "__main__":
                     generate_card(
                         card_type=num, suit=suit, species=species, color=color
                     )
+            end = time()
+            print(f'runtime {end-start} s')
         else:
             generate_card(inp)
 
